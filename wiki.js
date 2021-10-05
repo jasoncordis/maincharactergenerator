@@ -1,16 +1,18 @@
-document.getElementById("submit").addEventListener("click", function(){
-	username = document.getElementById("user_name").value;
-	
-  var ele = document.getElementsByTagName('input');
-                      if(ele[1].checked)
-                           WD("Forrest_Gump", username)
-                      else if(ele[2].checked)
-                          	WD("Raiders_of_the_Lost_Ark", username)
-                      else if(ele[3].checked)
-                            WD("Die_Hard", username)
-                      else if(ele[4].checked)
-                            WD("Clueless", username)
-});
+window.onload=function(){
+  document.getElementById("submit").addEventListener("click", function(){
+    username = document.getElementById("user_name").value;
+    
+    var ele = document.getElementsByTagName('input');
+                        if(ele[1].checked)
+                             WD("Forrest_Gump", username)
+                        else if(ele[2].checked)
+                              WD("Raiders_of_the_Lost_Ark", username)
+                        else if(ele[3].checked)
+                              WD("Die_Hard", username)
+                        else if(ele[4].checked)
+                              WD("Clueless", username)
+  });
+}
 
 function WD(item, name) {
     url = "https://en.wikipedia.org/w/api.php?format=json&action=query&titles=" + item.toString() + "&prop=revisions&rvprop=content";
