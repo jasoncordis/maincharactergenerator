@@ -1,18 +1,24 @@
 body {
-font-family: "Lucida Console", Arial, serif;
-}
-
+  font-family: "Lucida Console", Arial, serif;
+  }
+  
 h1{
-  text-align:center
-}
+    text-align:center
+  }
+
 h3{
-  text-align:center
-}
+    text-align:center
+  }
+
 #form{
-  text-align:center
-}
+    text-align:center
+  }
 
 #summary{
-  margin-right: 10%;
-  margin-left: 10%;
-}
+    margin-right: 10%;
+    margin-left: 10%;
+  }
+  
+#submit{
+    z-index: 99;
+  }
