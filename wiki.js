@@ -1,8 +1,16 @@
-// One query, example code:
 function trigger(){
 	username = document.getElementById("user_name").value;
-	WD("Forrest Gump", username)
-  console.log("hey")
+	
+  var ele = document.getElementsByTagName('input');
+                      if(ele[1].checked)
+                           WD("Forrest_Gump", username)
+                      else if(ele[2].checked)
+                          	WD("Raiders_of_the_Lost_Ark", username)
+                      else if(ele[3].checked)
+                            WD("Die_Hard", username)
+                      else if(ele[4].checked)
+                            WD("Clueless", username)
+                 
 }
 
 function WD(item, name) {
@@ -61,18 +69,23 @@ function WD(item, name) {
           cast = cast.substring(0, cast.search('/'))
         if(cast.includes("\("))
           cast = cast.substring(0, cast.search("\\(")-1) 
+        if(cast.includes(","))
+          cast = cast.substring(0, cast.search(",")) 
         sent = sent.substring(0, sent.search("Cast"))
         sent = sent.replaceAll(cast, name)
         
         if(cast.includes(" ")){
         	firstname = cast.substring(0, cast.search(" "))
           lastname = cast.substring(cast.search(" ")+1)
-          
+          	console.log(firstname)
+            console.log(lastname)
           if(name.includes(" ")){
-        		userFirst = name.substring(0, cast.search(" ")-1)
-            userLast = name.substring(cast.search(" ")-1)
+        		userFirst = name.substring(0, name.search(" "))
+            userLast = name.substring(name.search(" ")+1)
            	sent = sent.replaceAll(firstname, userFirst)
-         		sent = sent.replaceAll(lastname, userLast)           
+         		sent = sent.replaceAll(lastname, userLast)  
+            console.log(userFirst)
+            console.log(userLast)
           }
           else{
           sent = sent.replaceAll(firstname, name)
@@ -82,7 +95,6 @@ function WD(item, name) {
         sent = sent.substring(0, sent.search("=="))
         
         result = sent;
-        
         let ele = document.getElementById('summary');
         ele.innerHTML = result;
         
