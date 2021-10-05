@@ -12,6 +12,19 @@ window.onload=function(){
                         else if(ele[4].checked)
                               WD("Clueless", username)
   });
+   document.getElementById("submit").addEventListener("touchstart", function(){
+    username = document.getElementById("user_name").value;
+    
+    var ele = document.getElementsByTagName('input');
+                        if(ele[1].checked)
+                             WD("Forrest_Gump", username)
+                        else if(ele[2].checked)
+                              WD("Raiders_of_the_Lost_Ark", username)
+                        else if(ele[3].checked)
+                              WD("Die_Hard", username)
+                        else if(ele[4].checked)
+                              WD("Clueless", username)
+  });
 }
 
 function WD(item, name) {
