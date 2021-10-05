@@ -1,7 +1,7 @@
 window.onload=function(){
   document.getElementById("submit").addEventListener("click", function(){
     username = document.getElementById("user_name").value;
-    
+    console.log("hey")
     var ele = document.getElementsByTagName('input');
                         if(ele[1].checked)
                              WD("Forrest_Gump", username)
