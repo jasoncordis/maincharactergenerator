@@ -1,119 +1,120 @@
 window.onload=function(){
-  document.getElementById("submit").addEventListener("click", function(){
-    username = document.getElementById("user_name").value;
-    
-    var ele = document.getElementsByTagName('input');
-                        if(ele[1].checked)
-                             WD("Forrest_Gump", username)
-                        else if(ele[2].checked)
-                              WD("Raiders_of_the_Lost_Ark", username)
-                        else if(ele[3].checked)
-                              WD("Die_Hard", username)
-                        else if(ele[4].checked)
-                              WD("Clueless", username)
-  });
-   document.getElementById("submit").addEventListener("touchstart", function(){
-    username = document.getElementById("user_name").value;
-    
-    var ele = document.getElementsByTagName('input');
-                        if(ele[1].checked)
-                             WD("Forrest_Gump", username)
-                        else if(ele[2].checked)
-                              WD("Raiders_of_the_Lost_Ark", username)
-                        else if(ele[3].checked)
-                              WD("Die_Hard", username)
-                        else if(ele[4].checked)
-                              WD("Clueless", username)
-  });
+  document.getElementById("submit").addEventListener("touchstart", function(){
+   username = document.getElementById("user_name").value;
+   
+   var ele = document.getElementsByTagName('input');
+                       if(ele[1].checked)
+                            WD("Forrest_Gump", username)
+                       else if(ele[2].checked)
+                             WD("Raiders_of_the_Lost_Ark", username)
+                       else if(ele[3].checked)
+                             WD("Die_Hard", username)
+                       else if(ele[4].checked)
+                             WD("Clueless", username)
+ });
+
+ document.getElementById("submit").addEventListener("click", function(){
+   username = document.getElementById("user_name").value;
+   
+   var ele = document.getElementsByTagName('input');
+                       if(ele[1].checked)
+                            WD("Forrest_Gump", username)
+                       else if(ele[2].checked)
+                             WD("Raiders_of_the_Lost_Ark", username)
+                       else if(ele[3].checked)
+                             WD("Die_Hard", username)
+                       else if(ele[4].checked)
+                             WD("Clueless", username)
+ });
 }
 
 function WD(item, name) {
-    url = "https://en.wikipedia.org/w/api.php?format=json&action=query&titles=" + item.toString() + "&prop=revisions&rvprop=content";
-    $.getJSON(url, function (json) {
-        var item_id = Object.keys(json.query.pages)[0]; // THIS DO THE TRICK !
-        sent = json.query.pages[item_id].revisions[0]["*"];
-        sent = sent.substring(sent.search("Plot")+7)
-        sent = sent.substring(0, sent.search("Production"))
-        
-        	while(sent.includes('\[')){
-        	str = sent.substring(sent.search('\\[\\['), sent.search('\\]\\]')+2)
-          str1 = str.substring(2, str.search('\\]\\]'))
-          if(str1.includes('|')){
-             str1 = str1.substring(str1.search('\\|')+1)
-             }
-          sent = sent.replace(str, str1)
-          }      
-          
-          var x = 0
-          var y = 0
-          var start
-          for (let i = 0; i < sent.length; i++) {
-  					if(sent[i] == '\{'){
-            	x++
-              if(y == 0)
-              	start = i
-              y = 1
-              }
-            if(sent[i] == '\}')
-            	x--
-            
-            if(x == 0 && y == 1){
-            		sent1 = sent.substring(start, i+1)
-                sent2 = sent.substring(start+2, i-1)
-                if(sent2 == "snd"){
-                sent2 = sent2.replace("snd", '—')
-                sent = sent.replace(sent1, sent2)
-                }
-                else
-                sent = sent.replace(sent1, ' ')
-                y = 0
+   url = "https://en.wikipedia.org/w/api.php?format=json&action=query&titles=" + item.toString() + "&prop=revisions&rvprop=content";
+   $.getJSON(url, function (json) {
+       var item_id = Object.keys(json.query.pages)[0]; // THIS DO THE TRICK !
+       sent = json.query.pages[item_id].revisions[0]["*"];
+       sent = sent.substring(sent.search("Plot")+7)
+       sent = sent.substring(0, sent.search("Production"))
+       
+         while(sent.includes('\[')){
+         str = sent.substring(sent.search('\\[\\['), sent.search('\\]\\]')+2)
+         str1 = str.substring(2, str.search('\\]\\]'))
+         if(str1.includes('|')){
+            str1 = str1.substring(str1.search('\\|')+1)
             }
-				}  
-          
+         sent = sent.replace(str, str1)
+         }      
+         
+         var x = 0
+         var y = 0
+         var start
+         for (let i = 0; i < sent.length; i++) {
+           if(sent[i] == '\{'){
+             x++
+             if(y == 0)
+               start = i
+             y = 1
+             }
+           if(sent[i] == '\}')
+             x--
+           
+           if(x == 0 && y == 1){
+               sent1 = sent.substring(start, i+1)
+               sent2 = sent.substring(start+2, i-1)
+               if(sent2 == "snd"){
+               sent2 = sent2.replace("snd", '—')
+               sent = sent.replace(sent1, sent2)
+               }
+               else
+               sent = sent.replace(sent1, ' ')
+               y = 0
+           }
+       }  
+         
 
-				sent = sent.replaceAll('\n', '<br>')
-        
-        cast = sent.substring(sent.search("Cast"))
-        cast = cast.substring(cast.search(/[*]/g))
-        cast = cast.substring(cast.search("as"))
-        cast = cast.substring(3, cast.search('<br>'))
-        if(cast.includes(':'))
-        	cast = cast.substring(0, cast.search(':'))
-        if(cast.includes('/'))
-          cast = cast.substring(0, cast.search('/'))
-        if(cast.includes("\("))
-          cast = cast.substring(0, cast.search("\\(")-1) 
-        if(cast.includes(","))
-          cast = cast.substring(0, cast.search(",")) 
-        sent = sent.substring(0, sent.search("Cast"))
-        sent = sent.replaceAll(cast, name)
-        
-        if(cast.includes(" ")){
-        	firstname = cast.substring(0, cast.search(" "))
-          lastname = cast.substring(cast.search(" ")+1)
-          	console.log(firstname)
-            console.log(lastname)
-          if(name.includes(" ")){
-        		userFirst = name.substring(0, name.search(" "))
-            userLast = name.substring(name.search(" ")+1)
-           	sent = sent.replaceAll(firstname, userFirst)
-         		sent = sent.replaceAll(lastname, userLast)  
-            console.log(userFirst)
-            console.log(userLast)
-          }
-          else{
-          sent = sent.replaceAll(firstname, name)
-          sent = sent.replaceAll(lastname, name)
-          }
-				}
-        sent = sent.substring(0, sent.search("=="))
-        
-        result = sent;
-        
-        yourMovie = "<h1>" + name + "'s Movie:" + "</h1>"
-        
-        let ele = document.getElementById('summary');
-        ele.innerHTML = yourMovie + result;
-        
-    });
+       sent = sent.replaceAll('\n', '<br>')
+       
+       cast = sent.substring(sent.search("Cast"))
+       cast = cast.substring(cast.search(/[*]/g))
+       cast = cast.substring(cast.search("as"))
+       cast = cast.substring(3, cast.search('<br>'))
+       if(cast.includes(':'))
+         cast = cast.substring(0, cast.search(':'))
+       if(cast.includes('/'))
+         cast = cast.substring(0, cast.search('/'))
+       if(cast.includes("\("))
+         cast = cast.substring(0, cast.search("\\(")-1) 
+       if(cast.includes(","))
+         cast = cast.substring(0, cast.search(",")) 
+       sent = sent.substring(0, sent.search("Cast"))
+       sent = sent.replaceAll(cast, name)
+       
+       if(cast.includes(" ")){
+         firstname = cast.substring(0, cast.search(" "))
+         lastname = cast.substring(cast.search(" ")+1)
+           console.log(firstname)
+           console.log(lastname)
+         if(name.includes(" ")){
+           userFirst = name.substring(0, name.search(" "))
+           userLast = name.substring(name.search(" ")+1)
+            sent = sent.replaceAll(firstname, userFirst)
+            sent = sent.replaceAll(lastname, userLast)  
+           console.log(userFirst)
+           console.log(userLast)
+         }
+         else{
+         sent = sent.replaceAll(firstname, name)
+         sent = sent.replaceAll(lastname, name)
+         }
+       }
+       sent = sent.substring(0, sent.search("=="))
+       
+       result = sent;
+       
+       yourMovie = "<h1>" + name + "'s Movie:" + "</h1>"
+       
+       let ele = document.getElementById('summary');
+       ele.innerHTML = yourMovie + result;
+       
+   });
 }
