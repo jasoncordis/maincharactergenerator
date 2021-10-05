@@ -1,7 +1,7 @@
 window.onload=function(){
   document.getElementById("submit").addEventListener("click", function(){
     username = document.getElementById("user_name").value;
-    console.log("hey")
+    
     var ele = document.getElementsByTagName('input');
                         if(ele[1].checked)
                              WD("Forrest_Gump", username)
@@ -96,8 +96,11 @@ function WD(item, name) {
         sent = sent.substring(0, sent.search("=="))
         
         result = sent;
+        
+        yourMovie = "<h1>" + name + "'s Movie:" + "</h1>"
+        
         let ele = document.getElementById('summary');
-        ele.innerHTML = "<h1> Your movie </h1>"  + result;
+        ele.innerHTML = yourMovie + result;
         
     });
 }
