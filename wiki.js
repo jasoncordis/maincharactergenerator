@@ -1,4 +1,4 @@
-function trigger(){
+document.getElementById("submit").addEventListener("click", function(){
 	username = document.getElementById("user_name").value;
 	
   var ele = document.getElementsByTagName('input');
@@ -10,8 +10,7 @@ function trigger(){
                             WD("Die_Hard", username)
                       else if(ele[4].checked)
                             WD("Clueless", username)
-                 
-}
+});
 
 function WD(item, name) {
     url = "https://en.wikipedia.org/w/api.php?format=json&action=query&titles=" + item.toString() + "&prop=revisions&rvprop=content";
@@ -29,7 +28,7 @@ function WD(item, name) {
              }
           sent = sent.replace(str, str1)
           }      
-      
+          
           var x = 0
           var y = 0
           var start
@@ -96,7 +95,7 @@ function WD(item, name) {
         
         result = sent;
         let ele = document.getElementById('summary');
-        ele.innerHTML = result;
+        ele.innerHTML = "<h1> Your movie </h1>"  + result;
         
     });
 }

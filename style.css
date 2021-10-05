@@ -1,11 +1,13 @@
 body {
-font-family: "Lucida Console", Times, serif;
+font-family: "Lucida Console", Arial, serif;
 }
 
 h1{
   text-align:center
 }
-
+h3{
+  text-align:center
+}
 #form{
   text-align:center
 }
