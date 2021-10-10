@@ -18,7 +18,9 @@ h3{
     margin-right: 10%;
     margin-left: 10%;
   }
-  
-#submit{
-    z-index: 99;
-  }
+
+.home {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}

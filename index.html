@@ -1,32 +1,34 @@
 <!DOCTYPE html>
-    <head>
-        <title>Main Character Generator</title>
-        <link rel="icon" 
-        type="image/png" 
-        href="moviefav.png" />
-        <link rel="stylesheet" href="style.css">
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src = "wiki.js"></script>
-    </head>
-    <H1>
-        Main Character Generator
-       </H1>
-       
-        <body>
-        <form id='form' method = 'post'>
-               <p> Name: <input type='text' id = "user_name"/></p>
-               <input type="radio" id="gump" name="movie" value="HTML">
-               <label for="gump">Forrest Gump</label>
-               <input type="radio" id="raiders" name="movie">
-               <label for="raiders">Raiders of the Lost Ark</label>
-               <input type="radio" id="diehard" name="movie">
-               <label for="diehard">Die Hard</label>
-               <input type="radio" id="Clueless" name="movie">
-               <label for="diehard">Clueless</label>
-               <p><input id ="submit" type = "button" value='Enter'/></p>
-           </form>
-       
-       
-       <div id="summary"></div>
-       </body>
+<head>
+    <title>Main Character Generator</title>
+    <link rel="icon" 
+    type="image/png" 
+    href="moviefav.png" />
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src = "wiki.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<H1>
+    Main Character Generator
+   </H1>
+   
+    <body>
+    <div class = 'home'>
+    <form id='form' method = 'post'>
+           <p> Name: <input type='text' id = "user_name"/></p>
+           <input type="radio" id="gump" name="movie" value="HTML">
+           <label for="gump">Forrest Gump</label>
+           <input type="radio" id="raiders" name="movie">
+           <label for="raiders">Raiders of the Lost Ark</label>
+           <input type="radio" id="diehard" name="movie">
+           <label for="diehard">Die Hard</label>
+           <input type="radio" id="Clueless" name="movie">
+           <label for="diehard">Clueless</label>
+           <p><input id ="submit" type = "button" value='Enter'/></p>
+       </form>
+   </div>
+   
+   <div id="summary"></div>
+   </body>
 </html>
