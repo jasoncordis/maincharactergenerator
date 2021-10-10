@@ -86,6 +86,7 @@ try {
  const req = await fetch(url);
  const json = await req.json();
  text = json.parse.text["*"]
+ if(!text.includes("list of episodes")){
  text = text.substring(text.search("Edit section: Plot")+80)
  cast = text.substring(text.search("Edit section: Cast"))
  cast = cast.substring(cast.search("<li>"))
@@ -169,6 +170,10 @@ while(text.includes("&#91")){
        let ele = document.getElementById("summary");
        ele.innerHTML = "Invalid movie, try a different one"
  }
+}else{
+  let ele = document.getElementById("summary");
+  ele.innerHTML = "Invalid movie, try a different one"
+}
 } catch (e) {
  console.error(e);
 }
