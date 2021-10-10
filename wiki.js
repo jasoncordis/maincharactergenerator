@@ -30,7 +30,6 @@ document.getElementById("entermovie").addEventListener("click", function(){
 document.getElementById("submit").addEventListener("click", function(){
 username = document.getElementById("user_name").value;
 if(listmovie == 1){
-console.log("hey");
 var pick = document.getElementsByTagName('input');
                     if(pick[2].checked)
                          WD(41528, username)
@@ -110,13 +109,18 @@ try {
      break
      }
  }
- while(text.includes("{")){
-  text1 = text.substring(text.search("{"), text.search("}")+1)
+
+ console.log(text);
+
+
+while(text.includes("&#91")){
+  text1 = text.substring(text.search("&#91;"), text.search("&#93;")+5)
   text = text.replace(text1,'')
-  if((text.length-text.search("{"))<20){
+  if((text.length-text.search("&#91;"))<20){
     break
     }
 }
+
  text = text.replaceAll('\n', '<br><br>')
  
  var x = 0
@@ -138,16 +142,25 @@ try {
         userLast = name.substring(name.search(" ")+1)
          text = text.replaceAll(firstname, userFirst)
          text = text.replaceAll(lastname, userLast)  
+         if(firstname.slice(-1)!='s')
+         text = text.replaceAll(userFirst+"' ", userFirst+"'s ")
+         if(lastname.slice(-1)!='s')
+         text = text.replaceAll(userLast+"' ", userLast+"'s ")
       }
       else{
       text = text.replaceAll(cast, name)
       text = text.replaceAll(lastname, name)
       text = text.replaceAll(firstname, name)
+      if(name.slice(-1)!='s'){
+      text = text.replaceAll(name+"' ", name+"'s ")
+      }
       }
     }
-    else
+    else{
       text=text.replaceAll(cast, name)
-    
+      if(name.slice(-1)!='s')
+      text = text.replaceAll(name+"' ", name+"'s ")
+    }
     
  let ele = document.getElementById("summary");
  ele.innerHTML = text
