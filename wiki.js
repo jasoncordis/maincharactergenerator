@@ -110,7 +110,13 @@ try {
      break
      }
  }
- 
+ while(text.includes("{")){
+  text1 = text.substring(text.search("{"), text.search("}")+1)
+  text = text.replace(text1,'')
+  if((text.length-text.search("{"))<20){
+    break
+    }
+}
  text = text.replaceAll('\n', '<br><br>')
  
  var x = 0
