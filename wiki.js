@@ -99,7 +99,9 @@ try {
      cast = cast.substring(0, cast.search('<'))   
  if(cast.includes('/'))
       cast = cast.substring(0, cast.search('/'))     
-       
+ if(cast.includes(','))
+      cast = cast.substring(0, cast.search(',')) 
+
  if(text.includes("Edit section: Cast")){     
  text = text.substring(0,text.search("Edit section: Cast")-205) 
  text = text.substring(text.search(">")+5)     
