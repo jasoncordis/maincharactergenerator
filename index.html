@@ -17,14 +17,16 @@
     <div class = 'home'>
     <form id='form' method = 'post'>
            <p> Name: <input type='text' id = "user_name"/></p>
-           <input type="radio" id="gump" name="movie" value="HTML">
-           <label for="gump">Forrest Gump</label>
-           <input type="radio" id="raiders" name="movie">
-           <label for="raiders">Raiders of the Lost Ark</label>
-           <input type="radio" id="diehard" name="movie">
-           <label for="diehard">Die Hard</label>
-           <input type="radio" id="Clueless" name="movie">
-           <label for="diehard">Clueless</label>
+           <input type="radio" id="listmovie" name="listmovie" value="" checked >
+Pick a movie from the list: <br>
+           <div id = movielist>
+           
+           </div>
+           
+           <input type="radio" id="entermovie" name="entermovie"> Or enter your own movie: <br><br>
+           <div id = "searchmovie">
+           
+           </div>
            <p><input id ="submit" type = "button" value='Enter'/></p>
        </form>
    </div>
