@@ -1,6 +1,6 @@
 window.onload=function(){
-  var ele = document.getElementById("movielist");
- ele.innerHTML = ''
+  var ele = document.getElementById("searchmovie");
+ ele.innerHTML = '<br>'
  
  var ele1 = document.getElementById("movielist");
  ele1.innerHTML = "<input type=\"radio\" id=\"gump\" name=\"movie\"> <label for=\"gump\">Forrest Gump &nbsp; </label> <input type=\"radio\" id=\"raiders\" name=\"movie\"><label for=\"raiders\"> &nbsp;  Raiders of the Lost Ark &nbsp; </label><input type=\"radio\" id=\"diehard\" name=\"movie\"><label for=\"diehard\">&nbsp;Die Hard &nbsp;  </label><input type=\"radio\" id=\"Clueless\" name=\"movie\"><label for=\"diehard\">&nbsp;Clueless</label>"	
@@ -13,7 +13,7 @@ document.getElementById("listmovie").addEventListener("click", function(){
   var ele1 = document.getElementById("movielist");
  ele1.innerHTML = "<input type=\"radio\" id=\"gump\" name=\"movie\"> <label for=\"gump\">Forrest Gump &nbsp; </label> <input type=\"radio\" id=\"raiders\" name=\"movie\"><label for=\"raiders\"> &nbsp;  Raiders of the Lost Ark &nbsp; </label><input type=\"radio\" id=\"diehard\" name=\"movie\"><label for=\"diehard\">&nbsp;Die Hard &nbsp;  </label><input type=\"radio\" id=\"Clueless\" name=\"movie\"><label for=\"diehard\">&nbsp;Clueless</label>"	
  var ele2 = document.getElementById("searchmovie");
- ele2.innerHTML = "";
+ ele2.innerHTML = "<br>";
  listmovie = 1;
 });
 
@@ -50,7 +50,7 @@ else{
 }
 
 function ajax (keyword, year, name) { 
-fullmovie = keyword + "%20" + year;
+fullmovie = keyword + "%20" + "(" + year + " film)";
 $.ajax({ 
 url: "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=" + fullmovie + "&prop=info&inprop=url&utf8=&format=json",
 dataType: "jsonp",
@@ -88,33 +88,70 @@ try {
  text = json.parse.text["*"]
  if(!text.includes("list of episodes")){
  text = text.substring(text.search("Edit section: Plot")+80)
- cast = text.substring(text.search("Edit section: Cast"))
+ if(text.includes("Voice cast")){
+  cast = text.substring(text.search("Voice cast"))
+  }
+  
+ else if(text.includes("Edit section: Cast")){
+  cast = text.substring(text.search("Edit section: Cast"))
+}
+
  cast = cast.substring(cast.search("<li>"))
- cast = cast.substring(cast.search(" as ")+3, cast.search("\n"))                  
- if(cast.includes(':'))
+ cast = cast.substring(cast.search(" as ")+3, cast.search("\n"))   
+ if(cast.includes(':')){
       cast = cast.substring(0, cast.search(':'))
+ }
+ if(cast.includes('<li>')){
+      cast = cast.substring(cast.search('<li>')+4)
+ }
+
+
  if(cast.includes("/wiki/"))
-     cast = cast.substring(cast.search('>')+1)
+     cast = cast.substring(cast.search('>')+1)              
+ 
  if(cast.includes('<'))
-     cast = cast.substring(0, cast.search('<'))   
+     cast = cast.substring(0, cast.search('<'))  
  if(cast.includes('/'))
       cast = cast.substring(0, cast.search('/'))     
  if(cast.includes(','))
-      cast = cast.substring(0, cast.search(',')) 
+      cast = cast.substring(0, cast.search(','))
+
+  while(cast.slice(-1)== ' ')
+      cast = cast.substring(0, cast.length-1);
+
+  var x = 0
+
+  for(let i = 0; i < cast.length; i++){
+    if(cast[i] == ' ')
+      x++
+    else
+      break
+  }
+  cast = cast.substring(x)  
 
  if(text.includes("Edit section: Cast")){     
- text = text.substring(0,text.search("Edit section: Cast")-205) 
- text = text.substring(text.search(">")+5)     
- while(text.includes("<")){
-   text1 = text.substring(text.search("<"), text.search(">")+1)
-   text = text.replace(text1,'')
-   if((text.length-text.search("<"))<20){
-     break
-     }
- }
+  text = text.substring(0,text.search("Edit section: Cast")-205) 
+  text = text.substring(text.search(">")+5)     
 
- console.log(text);
+  while(text.includes("File:")){
+    text1 = text.substring(text.search("div class"))
+    text1 = text1.substring(0, text1.search('\n'))
+    text = text.replace(text1, '')
+  }
+  
+  if(text.indexOf('<')>text.indexOf('>')){
+    text1= text.substring(0, text.search('<')+1)
+    text=text.replace(text1,'')
+    }
+    
 
+  while(text.includes("<")){
+    text1 = text.substring(text.search("<"), text.search(">")+1)
+    text = text.replace(text1,'')
+    if((text.length-text.search("<"))<50){
+      break
+      }
+  }
 
 while(text.includes("&#91")){
   text1 = text.substring(text.search("&#91;"), text.search("&#93;")+5)
@@ -122,24 +159,33 @@ while(text.includes("&#91")){
   if((text.length-text.search("&#91;"))<20){
     break
     }
+ 
 }
 
  text = text.replaceAll('\n', '<br><br>')
- 
- var x = 0
- 
- for(let i = 0; i < cast.length; i++){
-   if(cast[i] == ' ')
-     x++
-   else
-     break
- }
- 
- cast = cast.substring(x)  
+
 
  if(cast.includes(" ")){
+   
       firstname = cast.substring(0, cast.search(" "))
-      lastname = cast.substring(cast.search(" ")+1)
+      
+      if(cast.includes('"')){
+        nickname = cast.substring(cast.search('"')+1, cast.lastIndexOf('"'))
+        text = text.replaceAll(nickname, firstname)
+      }
+
+      if(cast.includes(')')){
+        console.log("slgken")
+        parenthetical = cast.match(/\((.*?)\)/)[0]
+        parenthetical = parenthetical.substring(1,parenthetical.length-1)
+        text = text.replaceAll(parenthetical, firstname)
+        console.log(parenthetical)
+      }
+  
+      console.log(cast)
+
+      lastname = cast.substring(cast.lastIndexOf(" ")+1)
+      
       if(name.includes(" ")){
         userFirst = name.substring(0, name.search(" "))
         userLast = name.substring(name.search(" ")+1)
@@ -149,6 +195,15 @@ while(text.includes("&#91")){
          text = text.replaceAll(userFirst+"' ", userFirst+"'s ")
          if(lastname.slice(-1)!='s')
          text = text.replaceAll(userLast+"' ", userLast+"'s ")
+
+         if(text.includes(userFirst + " " + userFirst)){
+          text1 = userFirst + " " + userFirst
+          text = text.replaceAll(text1, userFirst)
+          }
+          if(text.includes(userFirst + ' "' + userFirst + '"')){
+            text1 = userFirst + ' "' + userFirst + '"'
+            text = text.replaceAll(text1, userFirst)
+          }
       }
       else{
       text = text.replaceAll(cast, name)
@@ -157,6 +212,18 @@ while(text.includes("&#91")){
       if(name.slice(-1)!='s'){
       text = text.replaceAll(name+"' ", name+"'s ")
       }
+
+      if(text.includes(name + ' "' + name + '"')){
+        console.log("slknegsenlkg")
+        text1 = name + ' "' + name + '"'
+        text = text.replaceAll(text1, name)
+      }
+
+      if(text.includes(name + " " + name)){
+        text1 = name + " " + name
+        text = text.replaceAll(text1, name)
+      }
+
       }
     }
     else{
@@ -174,7 +241,7 @@ while(text.includes("&#91")){
  }
 }else{
   let ele = document.getElementById("summary");
-  ele.innerHTML = "Invalid movie, try a different one"
+  ele.innerHTML = "TV shows not supported, try entering a movie"
 }
 } catch (e) {
  console.error(e);
