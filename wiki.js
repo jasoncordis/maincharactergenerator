@@ -3,7 +3,7 @@ window.onload=function(){
  ele.innerHTML = '<br>'
  
  var ele1 = document.getElementById("movielist");
- ele1.innerHTML = "<input type=\"radio\" id=\"gump\" name=\"movie\"> <label for=\"gump\">Forrest Gump &nbsp; </label> <input type=\"radio\" id=\"raiders\" name=\"movie\"><label for=\"raiders\"> &nbsp;  Raiders of the Lost Ark &nbsp; </label><input type=\"radio\" id=\"diehard\" name=\"movie\"><label for=\"diehard\">&nbsp;Die Hard &nbsp;  </label><input type=\"radio\" id=\"Clueless\" name=\"movie\"><label for=\"diehard\">&nbsp;Clueless</label>"	
+ ele1.innerHTML = "<input type=\"radio\" id=\"gump\" name=\"movie\"> <label for=\"gump\">Forrest Gump &nbsp; </label> <input type=\"radio\" id=\"raiders\" name=\"movie\"><label for=\"raiders\"> &nbsp;  Raiders of the Lost Ark &nbsp; </label><input type=\"radio\" id=\"diehard\" name=\"movie\"><label for=\"diehard\">&nbsp;Die Hard &nbsp;  </label><input type=\"radio\" id=\"Clueless\" name=\"movie\"><label for=\"clueless\">&nbsp;Clueless&nbsp;</label> </label><input type = \"radio\" id=\"The Shining\" name=\"movie\"><label for = \"shining\">&nbsp;The Shining&nbsp;</label> <input type = \"radio\" id = \"Breakfast at Tiffany's\" name = \"movie\"><label for = \"breakfastTiffanys\"> &nbsp; Breakfast at Tiffany's</label>"	
  
  var listmovie = 1;
  
@@ -11,7 +11,7 @@ document.getElementById("listmovie").addEventListener("click", function(){
   var radio = document.getElementById("entermovie");
  radio.checked = false;
   var ele1 = document.getElementById("movielist");
- ele1.innerHTML = "<input type=\"radio\" id=\"gump\" name=\"movie\"> <label for=\"gump\">Forrest Gump &nbsp; </label> <input type=\"radio\" id=\"raiders\" name=\"movie\"><label for=\"raiders\"> &nbsp;  Raiders of the Lost Ark &nbsp; </label><input type=\"radio\" id=\"diehard\" name=\"movie\"><label for=\"diehard\">&nbsp;Die Hard &nbsp;  </label><input type=\"radio\" id=\"Clueless\" name=\"movie\"><label for=\"diehard\">&nbsp;Clueless</label>"	
+ ele1.innerHTML = "<input type=\"radio\" id=\"gump\" name=\"movie\"> <label for=\"gump\">Forrest Gump &nbsp; </label> <input type=\"radio\" id=\"raiders\" name=\"movie\"><label for=\"raiders\"> &nbsp;  Raiders of the Lost Ark &nbsp; </label><input type=\"radio\" id=\"diehard\" name=\"movie\"><label for=\"diehard\">&nbsp;Die Hard &nbsp;  </label><input type=\"radio\" id=\"Clueless\" name=\"movie\"><label for=\"clueless\">&nbsp;Clueless&nbsp;</label> </label><input type = \"radio\" id=\"The Shining\" name=\"movie\"><label for = \"shining\">&nbsp;The Shining&nbsp;</label> <input type = \"radio\" id = \"Breakfast at Tiffany's\" name = \"movie\"><label for = \"breakfastTiffanys\"> &nbsp; Breakfast at Tiffany's</label>"		
  var ele2 = document.getElementById("searchmovie");
  ele2.innerHTML = "<br>";
  listmovie = 1;
@@ -39,6 +39,10 @@ var pick = document.getElementsByTagName('input');
                           WD(97646, username)
                     else if(pick[5].checked)
                           WD(105872, username)
+                    else if(pick[6].checked)
+                          WD(1186616, username)
+                    else if(pick[7].checked)
+                          WD(51906, username)
 }
 else{
  var ele2 = document.getElementById('moviename').value;
@@ -231,7 +235,12 @@ while(text.includes("&#91")){
       if(name.slice(-1)!='s')
       text = text.replaceAll(name+"' ", name+"'s ")
     }
-    
+
+  console.log(text)
+  text = text.substring(0, text.lastIndexOf('.')+1)
+
+  text = text.replaceAll("<br><br><br><br>", "<br><br>")
+
  let ele = document.getElementById("summary");
  ele.innerHTML = text
  }
