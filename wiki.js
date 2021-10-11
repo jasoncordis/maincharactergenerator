@@ -168,7 +168,7 @@ while(text.includes("&#91")){
 
  text = text.replaceAll('\n', '<br><br>')
 
-
+ if(name != ""){
  if(cast.includes(" ")){
    
       firstname = cast.substring(0, cast.search(" "))
@@ -235,11 +235,56 @@ while(text.includes("&#91")){
       if(name.slice(-1)!='s')
       text = text.replaceAll(name+"' ", name+"'s ")
     }
+  }
+  else{
+    if(cast.includes(" ")){
+   
+      firstname = cast.substring(0, cast.search(" "))
+      
+      if(cast.includes('"')){
+        nickname = cast.substring(cast.search('"')+1, cast.lastIndexOf('"'))
+        text = text.replaceAll(nickname, firstname)
+      }
+
+      if(cast.includes(')')){
+        console.log("slgken")
+        parenthetical = cast.match(/\((.*?)\)/)[0]
+        parenthetical = parenthetical.substring(1,parenthetical.length-1)
+        text = text.replaceAll(parenthetical, firstname)
+        console.log(parenthetical)
+      }
+  
+      console.log(cast)
+
+      lastname = cast.substring(cast.lastIndexOf(" ")+1)
+      
+      if(text.includes(firstname + ' "' + firstname + '"')){
+        console.log("slknegsenlkg")
+        text1 = firstname + ' "' + firstname + '"'
+        text = text.replaceAll(text1, "")
+      }
+
+      if(text.includes(firstname + " " + firstname)){
+        text1 = firstname + " " + firstname
+        text = text.replaceAll(text1, "")
+      }
+
+      text = text.replaceAll(firstname, "")
+      text = text.replaceAll(lastname, "")
+      text = text.replaceAll(name, "")
+
+      }
+    else{
+      text = text.replaceAll(name, "")
+    }
+
+  }
 
   console.log(text)
-  text = text.substring(0, text.lastIndexOf('.')+1)
-
+  
   text = text.replaceAll("<br><br><br><br>", "<br><br>")
+  text = text.substring(0, text.lastIndexOf('.')+1)
+  text = text += "<br><br><br><br>"
 
  let ele = document.getElementById("summary");
  ele.innerHTML = text
