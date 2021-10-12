@@ -66,7 +66,7 @@ success: function(response) {
 
   else {
     var title = response.query.search[0].pageid;
-    WD(title, name)
+    insertMainCharacter(title, name)
   }
 },
 error: function () {
