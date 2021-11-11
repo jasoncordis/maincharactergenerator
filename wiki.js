@@ -1,9 +1,13 @@
 window.onload=function(){
 
-
-  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-    var ele = document.getElementById("home");
-    ele.innerHTML = 'Hey'
+   const ua = navigator.userAgent;
+   if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+      var ele = document.getElementById("home");
+      ele.innerHTML = 'Hey'
+   }
+   else if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) {
+      var ele = document.getElementById("home");
+      ele.innerHTML = 'Hey'
    }
 
   var ele = document.getElementById("searchmovie");
