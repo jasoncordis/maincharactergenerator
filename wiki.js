@@ -14,7 +14,7 @@ window.onload=function(){
  ele.innerHTML = '<br>'
  
  var ele1 = document.getElementById("movielist");
- ele1.innerHTML = "<input type=\"radio\" id=\"gump\" name=\"movie\"> <label for=\"gump\">Forrest Gump &nbsp; </label> <input type=\"radio\" id=\"raiders\" name=\"movie\"><label for=\"raiders\"> &nbsp;  Raiders of the Lost Ark &nbsp; </label><input type=\"radio\" id=\"casinoroyale\" name=\"movie\"><label for=\"casinoroyale\">&nbsp;Casino Royale &nbsp;  </label><input type=\"radio\" id=\"Clueless\" name=\"movie\"><label for=\"clueless\">&nbsp;Clueless&nbsp;</label> </label><input type = \"radio\" id=\"The Shining\" name=\"movie\"><label for = \"shining\">&nbsp;The Shining&nbsp;</label> <input type = \"radio\" id = \"The Wizard of Oz\" name = \"movie\"><label for = \"Wizard\"> &nbsp; The Wizard of Oz</label> &nbsp <input type = \"radio\" id = \"Shrek\" name = \"movie\"><label for = \"Shrek\"> &nbsp; Shrek</label>"	
+ ele1.innerHTML = "<input type=\"radio\" id=\"gump\" name=\"movie\"> <label for=\"gump\">Forrest Gump &nbsp; </label> <input type=\"radio\" id=\"raiders\" name=\"movie\"><label for=\"raiders\"> &nbsp;  Raiders of the Lost Ark &nbsp; </label><input type=\"radio\" id=\"casinoroyale\" name=\"movie\"><label for=\"casinoroyale\">&nbsp;Casino Royale &nbsp;  </label><input type=\"radio\" id=\"Clueless\" name=\"movie\"><label for=\"Clueless\">&nbsp;Clueless&nbsp;</label> </label><input type = \"radio\" id=\"The Shining\" name=\"movie\"><label for = \"The Shining\">&nbsp;The Shining&nbsp;</label> <input type = \"radio\" id = \"The Wizard of Oz\" name = \"movie\"><label for = \"The Wizard of Oz\"> &nbsp; The Wizard of Oz</label> &nbsp <input type = \"radio\" id = \"Shrek\" name = \"movie\"><label for = \"Shrek\"> &nbsp; Shrek</label>"	
  
  var listmovie = 1;
  
@@ -22,7 +22,7 @@ document.getElementById("listmovie").addEventListener("click", function(){
   var radio = document.getElementById("entermovie");
  radio.checked = false;
   var ele1 = document.getElementById("movielist");
- ele1.innerHTML = "<input type=\"radio\" id=\"gump\" name=\"movie\"> <label for=\"gump\">Forrest Gump &nbsp; </label> <input type=\"radio\" id=\"raiders\" name=\"movie\"><label for=\"raiders\"> &nbsp;  Raiders of the Lost Ark &nbsp; </label><input type=\"radio\" id=\"casinoroyale\" name=\"movie\"><label for=\"casinoroyale\">&nbsp;Casino Royale &nbsp;  </label><input type=\"radio\" id=\"Clueless\" name=\"movie\"><label for=\"clueless\">&nbsp;Clueless&nbsp;</label> </label><input type = \"radio\" id=\"The Shining\" name=\"movie\"><label for = \"shining\">&nbsp;The Shining&nbsp;</label> <input type = \"radio\" id = \"The Wizard of Oz\" name = \"movie\"><label for = \"Wizard\"> &nbsp; The Wizard of Oz</label> &nbsp <input type = \"radio\" id = \"Shrek\" name = \"movie\"><label for = \"Shrek\"> &nbsp; Shrek</label>"		
+ ele1.innerHTML = "<input type=\"radio\" id=\"gump\" name=\"movie\"> <label for=\"gump\">Forrest Gump &nbsp; </label> <input type=\"radio\" id=\"raiders\" name=\"movie\"><label for=\"raiders\"> &nbsp;  Raiders of the Lost Ark &nbsp; </label><input type=\"radio\" id=\"casinoroyale\" name=\"movie\"><label for=\"casinoroyale\">&nbsp;Casino Royale &nbsp;  </label><input type=\"radio\" id=\"Clueless\" name=\"movie\"><label for=\"Clueless\">&nbsp;Clueless&nbsp;</label> </label><input type = \"radio\" id=\"The Shining\" name=\"movie\"><label for = \"The Shining\">&nbsp;The Shining&nbsp;</label> <input type = \"radio\" id = \"The Wizard of Oz\" name = \"movie\"><label for = \"The Wizard of Oz\"> &nbsp; The Wizard of Oz</label> &nbsp <input type = \"radio\" id = \"Shrek\" name = \"movie\"><label for = \"Shrek\"> &nbsp; Shrek</label>"		
  var ele2 = document.getElementById("searchmovie");
  ele2.innerHTML = "<br>";
  listmovie = 1;
@@ -173,6 +173,7 @@ try {
       cast = cast.substring(cast.search('<li>')+4)
  }
 
+ console.log(cast);
 
  if(cast.includes("/wiki/"))
      cast = cast.substring(cast.search('>')+1)              
@@ -184,10 +185,21 @@ try {
  if(cast.includes(','))
       cast = cast.substring(0, cast.search(','))
 
-  while(cast.slice(-1)== ' ')
+  var whileError = 0;
+
+  while(cast.slice(-1)== ' '){
       cast = cast.substring(0, cast.length-1);
+      if(whileError > 500){
+      console.log("cast.slice(-1) = ' '")
+      break;
+    }
+  }
+
+  whileError = 0;
 
   var x = 0
+
+  console.log(cast);
 
   for(let i = 0; i < cast.length; i++){
     if(cast[i] == ' ')
@@ -197,6 +209,8 @@ try {
   }
   cast = cast.substring(x)  
 
+  console.log(cast);
+
  if(text.includes("Edit section: Cast")){   
   text = text.substring(0,text.search("Edit section: Cast")-205) 
   text = text.substring(text.search(">")+5)     
@@ -205,7 +219,12 @@ try {
     text1 = text.substring(text.search("div class"))
     text1 = text1.substring(0, text1.search('\n'))
     text = text.replace(text1, '')
+    if(whileError > 500){
+      console.log('text.includes("File:")')
+      break;
+    }
   }
+  whileError = 0;
   
   if(text.indexOf('<')>text.indexOf('>')){
     text1= text.substring(0, text.search('<')+1)
@@ -219,7 +238,15 @@ try {
     if((text.length-text.search("<"))<50){
       break
       }
+
+      if(whileError > 500){
+        console.log('text.includes("<")')
+        break;
+      }
+
   }
+
+  whileError = 0;
 
 while(text.includes("&#91")){
   text1 = text.substring(text.search("&#91;"), text.search("&#93;")+5)
@@ -227,14 +254,24 @@ while(text.includes("&#91")){
   if((text.length-text.search("&#91;"))<20){
     break
     }
+
+    if(whileError > 500){
+      console.log('text.includes("&#91")')
+      break;
+    }
  
 }
 
+whileError = 0;
+
  text = text.replaceAll('\n', '<br><br>')
+
+ console.log(cast)
+
 
  if(name != ""){
  if(cast.includes(" ")){
-   
+      console.log(cast)
       firstname = cast.substring(0, cast.search(" "))
       
       if(cast.includes('"')){
@@ -282,7 +319,6 @@ while(text.includes("&#91")){
       }
 
       if(text.includes(name + ' "' + name + '"')){
-        console.log("slknegsenlkg")
         text1 = name + ' "' + name + '"'
         text = text.replaceAll(text1, name)
       }
@@ -346,9 +382,18 @@ while(text.includes("&#91")){
   
   text = text.replaceAll("<br><br><br><br>", "<br><br>")
   text = text.substring(0, text.lastIndexOf('.')+1)
+
   while(text.search("<br>")==0){
     text = text.substring(4);
+    whileError++;
+
+    if(whileError > 500){
+      console.log('text.search("<br>"==0 error')
+      break;
+    }
   }
+  whileError = 0;
+
   text = text += "<br><br><br><br>"
 
   console.log(text)
@@ -360,14 +405,20 @@ while(text.includes("&#91")){
     document.getElementById("childDiv").innerHTML = "";
  }
 
+ if(name.slice(-1)!='s')
+    name = name + "'s Movie"
+  else
+    name = name + "' Movie"
+  
+
  if(hasChildDiv == 0){
  var newChild = document.createElement("div");
- newChild.innerHTML = "<br> <div id = 'childDiv'> <p class = 'intro' > " + name +"'s Movie </p>  <img id = poster src = " + poster  + " > </img>  <br> <br> <p class = 'intro' > Inspired by " + title + " </p> <br> <p id = summary-text> "+ text + "</p></div>"; 
+ newChild.innerHTML = "<br> <div id = 'childDiv'> <p class = 'intro' > " + name + "</p>  <img id = poster src = " + poster  + " > </img>  <br> <br> <p class = 'intro' > Inspired by " + title + " </p> <br> <p id = summary-text> "+ text + "</p></div>"; 
  document.getElementById("home").appendChild(newChild);  
  }
  else
  {
-   document.getElementById("childDiv").innerHTML =  "<br> <div id = 'childDiv'> <p class = 'intro' > " + name +"'s Movie </p>  <img id = poster src = " + poster  + " > </img>  <br> <br> <p class = 'intro' > Inspired by " + title + " </p> <br> <p id = summary-text> "+ text + "</p></div>"; 
+   document.getElementById("childDiv").innerHTML =  "<br> <div id = 'childDiv'> <p class = 'intro' > " + name + "</p>  <img id = poster src = " + poster  + " > </img>  <br> <br> <p class = 'intro' > Inspired by " + title + " </p> <br> <p id = summary-text> "+ text + "</p></div>"; 
  }
  hasChildDiv = 1;
 
