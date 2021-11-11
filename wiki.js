@@ -1,4 +1,11 @@
 window.onload=function(){
+
+
+  if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    var ele = document.getElementById("home");
+    ele.innerHTML = 'Hey'
+   }
+
   var ele = document.getElementById("searchmovie");
  ele.innerHTML = '<br>'
  
