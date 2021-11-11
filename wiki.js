@@ -125,6 +125,7 @@ error: function () {
 }
 
 var hasChildDiv = 0;
+var hasError = 0;
 
 const insertMainCharacter = async function(item, name) {
 const url = "https://en.wikipedia.org/w/api.php?" +
@@ -354,26 +355,40 @@ while(text.includes("&#91")){
 
 
  poster = "https://" + poster;
+
+ if(hasError == 1){
+    document.getElementById("childDiv").innerHTML = "";
+ }
+
  if(hasChildDiv == 0){
  var newChild = document.createElement("div");
- newChild.innerHTML = "<div id = 'childDiv'> <p class = 'intro' > " + name +"'s Movie </p>  <img id = poster src = " + poster  + " > </img>  <br> <br> <p class = 'intro' > Inspired by " + title + " </p> <br> <p id = summary-text> "+ text + "</p></div>"; 
+ newChild.innerHTML = "<br> <div id = 'childDiv'> <p class = 'intro' > " + name +"'s Movie </p>  <img id = poster src = " + poster  + " > </img>  <br> <br> <p class = 'intro' > Inspired by " + title + " </p> <br> <p id = summary-text> "+ text + "</p></div>"; 
  document.getElementById("home").appendChild(newChild);  
  }
  else
  {
-   document.getElementById("childDiv").innerHTML =  "<div id = 'childDiv'> <p class = 'intro' > " + name +"'s Movie </p>  <img id = poster src = " + poster  + " > </img>  <br> <br> <p class = 'intro' > Inspired by " + title + " </p> <br> <p id = summary-text> "+ text + "</p></div>"; 
+   document.getElementById("childDiv").innerHTML =  "<br> <div id = 'childDiv'> <p class = 'intro' > " + name +"'s Movie </p>  <img id = poster src = " + poster  + " > </img>  <br> <br> <p class = 'intro' > Inspired by " + title + " </p> <br> <p id = summary-text> "+ text + "</p></div>"; 
  }
  hasChildDiv = 1;
 
  }
  else{
-       let ele1 = document.getElementById("movieintro");
+       let ele1 = document.getElementById("childDiv");
        ele1.innerHTML = "Invalid movie, try specifying the year and title, or try a different movie";
       
  }
 }else{
-  let ele = document.getElementById("summary");
+  if(hasChildDiv == 0){
+    var newChild = document.createElement("div");
+    newChild.innerHTML = "<br> <div id = 'childDiv'> TV shows not supported, try entering a movie </div>"; 
+    document.getElementById("home").appendChild(newChild);  
+    hasError = 1;
+  }
+  else{
+  let ele = document.getElementById("childDiv");
   ele.innerHTML = "TV shows not supported, try entering a movie"
+    hasError = 1;
+  }
 }
 } catch (e) {
  console.error(e);
