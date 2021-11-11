@@ -124,6 +124,8 @@ error: function () {
 });
 }
 
+var hasChildDiv = 0;
+
 const insertMainCharacter = async function(item, name) {
 const url = "https://en.wikipedia.org/w/api.php?" +
  new URLSearchParams({
@@ -351,9 +353,17 @@ while(text.includes("&#91")){
   console.log(text)
 
 
- let ele1 = document.getElementById("movieintro");
  poster = "https://" + poster;
- ele1.innerHTML = " <p class = 'intro' > " + name +"'s Movie </p>  <img id = poster src = " + poster  + " > </img>  <br> <br> <p class = 'intro' > Inspired by " + title + " </p> <br> <p id = summary-text> "+ text + "</p>"; 
+ if(hasChildDiv == 0){
+ var newChild = document.createElement("div");
+ newChild.innerHTML = "<div id = 'childDiv'> <p class = 'intro' > " + name +"'s Movie </p>  <img id = poster src = " + poster  + " > </img>  <br> <br> <p class = 'intro' > Inspired by " + title + " </p> <br> <p id = summary-text> "+ text + "</p></div>"; 
+ document.getElementById("home").appendChild(newChild);  
+ }
+ else
+ {
+   document.getElementById("childDiv").innerHTML =  "<div id = 'childDiv'> <p class = 'intro' > " + name +"'s Movie </p>  <img id = poster src = " + poster  + " > </img>  <br> <br> <p class = 'intro' > Inspired by " + title + " </p> <br> <p id = summary-text> "+ text + "</p></div>"; 
+ }
+ hasChildDiv = 1;
 
  }
  else{
