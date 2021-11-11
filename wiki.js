@@ -27,7 +27,7 @@ document.getElementById("entermovie").addEventListener("click", function(){
  listmovie = 0;
 });
 
-document.getElementById("submit").addEventListener("click", function(){
+document.getElementById("submit").addEventListener("click touchstart", function(){
 username = document.getElementById("user_name").value;
 if(listmovie == 1){
 var pick = document.getElementsByTagName('input');
@@ -307,7 +307,7 @@ while(text.includes("&#91")){
 
  let ele1 = document.getElementById("movieintro");
  poster = "https://" + poster;
- ele1.innerHTML = " <p class = 'intro' > " + name +"'s Movie </p>  <img id = poster src = " + poster  + " > </img>  <br> <br> <p class = 'intro' > Inspired by " + title + " </p> <br> " + text;
+ ele1.innerHTML = " <p class = 'intro' > " + name +"'s Movie </p>  <img id = poster src = " + poster  + " > </img>  <br> <br> <p class = 'intro' > Inspired by " + title + " </p> <br> <p id = summary-text> "+ text + "</p>"; 
 
  }
  else{
