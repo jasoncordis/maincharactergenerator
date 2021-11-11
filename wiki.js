@@ -7,6 +7,7 @@ window.onload=function(){
    else if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) {
       document.getElementById("full").style.overflowY = "none";
       document.getElementById("submitButton").innerHTML = "";
+      document.getElementById("poster").style.width = "50px";
    }
 
   var ele = document.getElementById("searchmovie");
