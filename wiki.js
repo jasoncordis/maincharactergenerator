@@ -2,12 +2,10 @@ window.onload=function(){
 
    const ua = navigator.userAgent;
    if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
-      var ele = document.getElementById("home");
-      ele.innerHTML = 'Hey'
+    document.getElementById("full").style.overflowY = "none";
    }
    else if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) {
-      var ele = document.getElementById("home");
-      ele.innerHTML = 'Hey'
+      document.getElementById("full").style.overflowY = "none";
    }
 
   var ele = document.getElementById("searchmovie");
