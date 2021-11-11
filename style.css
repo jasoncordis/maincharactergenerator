@@ -67,7 +67,7 @@ h3{
 
 #full {
   width:1250px; 
-  overflow-y:scroll; 
+  overflow-y:scroll !important; 
   -webkit-overflow-scrolling: touch;
   position:fixed;
   height: 600px;
