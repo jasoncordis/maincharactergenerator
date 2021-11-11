@@ -1,5 +1,9 @@
 body {
-  font-family: "Lucida Console", Arial, serif;
+  font-family: 'Oswald', Arial, serif;
+  background: url('background.png');
+  background-repeat: no-repeat;
+  background-position: 50% 10%;
+  background-attachment: fixed;
   }
   
 h1{
@@ -11,16 +15,69 @@ h3{
   }
 
 #form{
-    text-align:center
+    text-align:center;
   }
 
 #summary{
-    margin-right: 10%;
-    margin-left: 10%;
+  position: absolute;
+  margin-top: 75%;
+  width: 70%;
+  top: 80%;
+  left: 50%;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
   }
 
 .home {
-  position: relative;
+  height: 10%;
   width: 100%;
-  height: 100%;
+  text-align:center;
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+#movieintro{
+  position: fixed;
+  margin-top: 31.5%;
+  width: 70%;
+  height: 300px;
+  top: 20%;
+  left: 50%;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+#poster {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  height: 300px;
+}
+
+.intro {
+  text-align: center;
+  font-size: 30px;
+}
+
+#full {
+  width:1250px; 
+  overflow-y:scroll; 
+  position:fixed;
+  height: 600px;
+  top: 40%;
+  left: 50%;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+#summary-text{
+  text-align: left;
+  color: white;
 }

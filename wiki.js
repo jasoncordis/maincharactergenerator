@@ -3,7 +3,7 @@ window.onload=function(){
  ele.innerHTML = '<br>'
  
  var ele1 = document.getElementById("movielist");
- ele1.innerHTML = "<input type=\"radio\" id=\"gump\" name=\"movie\"> <label for=\"gump\">Forrest Gump &nbsp; </label> <input type=\"radio\" id=\"raiders\" name=\"movie\"><label for=\"raiders\"> &nbsp;  Raiders of the Lost Ark &nbsp; </label><input type=\"radio\" id=\"diehard\" name=\"movie\"><label for=\"diehard\">&nbsp;Die Hard &nbsp;  </label><input type=\"radio\" id=\"Clueless\" name=\"movie\"><label for=\"clueless\">&nbsp;Clueless&nbsp;</label> </label><input type = \"radio\" id=\"The Shining\" name=\"movie\"><label for = \"shining\">&nbsp;The Shining&nbsp;</label> <input type = \"radio\" id = \"The Wizard of Oz\" name = \"movie\"><label for = \"Wizard\"> &nbsp; The Wizard of Oz</label>"	
+ ele1.innerHTML = "<input type=\"radio\" id=\"gump\" name=\"movie\"> <label for=\"gump\">Forrest Gump &nbsp; </label> <input type=\"radio\" id=\"raiders\" name=\"movie\"><label for=\"raiders\"> &nbsp;  Raiders of the Lost Ark &nbsp; </label><input type=\"radio\" id=\"casinoroyale\" name=\"movie\"><label for=\"casinoroyale\">&nbsp;Casino Royale &nbsp;  </label><input type=\"radio\" id=\"Clueless\" name=\"movie\"><label for=\"clueless\">&nbsp;Clueless&nbsp;</label> </label><input type = \"radio\" id=\"The Shining\" name=\"movie\"><label for = \"shining\">&nbsp;The Shining&nbsp;</label> <input type = \"radio\" id = \"The Wizard of Oz\" name = \"movie\"><label for = \"Wizard\"> &nbsp; The Wizard of Oz</label> &nbsp <input type = \"radio\" id = \"Shrek\" name = \"movie\"><label for = \"Shrek\"> &nbsp; Shrek</label>"	
  
  var listmovie = 1;
  
@@ -11,7 +11,7 @@ document.getElementById("listmovie").addEventListener("click", function(){
   var radio = document.getElementById("entermovie");
  radio.checked = false;
   var ele1 = document.getElementById("movielist");
- ele1.innerHTML = "<input type=\"radio\" id=\"gump\" name=\"movie\"> <label for=\"gump\">Forrest Gump &nbsp; </label> <input type=\"radio\" id=\"raiders\" name=\"movie\"><label for=\"raiders\"> &nbsp;  Raiders of the Lost Ark &nbsp; </label><input type=\"radio\" id=\"diehard\" name=\"movie\"><label for=\"diehard\">&nbsp;Die Hard &nbsp;  </label><input type=\"radio\" id=\"Clueless\" name=\"movie\"><label for=\"clueless\">&nbsp;Clueless&nbsp;</label> </label><input type = \"radio\" id=\"The Shining\" name=\"movie\"><label for = \"shining\">&nbsp;The Shining&nbsp;</label> <input type = \"radio\" id = \"The Wizard of Oz\" name = \"movie\"><label for = \"Wizard\"> &nbsp; The Wizard of Oz</label>"		
+ ele1.innerHTML = "<input type=\"radio\" id=\"gump\" name=\"movie\"> <label for=\"gump\">Forrest Gump &nbsp; </label> <input type=\"radio\" id=\"raiders\" name=\"movie\"><label for=\"raiders\"> &nbsp;  Raiders of the Lost Ark &nbsp; </label><input type=\"radio\" id=\"casinoroyale\" name=\"movie\"><label for=\"casinoroyale\">&nbsp;Casino Royale &nbsp;  </label><input type=\"radio\" id=\"Clueless\" name=\"movie\"><label for=\"clueless\">&nbsp;Clueless&nbsp;</label> </label><input type = \"radio\" id=\"The Shining\" name=\"movie\"><label for = \"shining\">&nbsp;The Shining&nbsp;</label> <input type = \"radio\" id = \"The Wizard of Oz\" name = \"movie\"><label for = \"Wizard\"> &nbsp; The Wizard of Oz</label> &nbsp <input type = \"radio\" id = \"Shrek\" name = \"movie\"><label for = \"Shrek\"> &nbsp; Shrek</label>"		
  var ele2 = document.getElementById("searchmovie");
  ele2.innerHTML = "<br>";
  listmovie = 1;
@@ -36,13 +36,15 @@ var pick = document.getElementsByTagName('input');
                     else if(pick[3].checked)
                     insertMainCharacter(54166, username)
                     else if(pick[4].checked)
-                    insertMainCharacter(97646, username)
+                    insertMainCharacter(930379, username)
                     else if(pick[5].checked)
                     insertMainCharacter(105872, username)
                     else if(pick[6].checked)
                     insertMainCharacter(1186616, username)
                     else if(pick[7].checked)
                     insertMainCharacter(561315, username)
+                    else if(pick[8].checked)
+                    insertMainCharacter(18717177, username)
 }
 else{
  var ele2 = document.getElementById('moviename').value;
@@ -60,8 +62,8 @@ url: "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=" + f
 dataType: "jsonp",
 success: function(response) {
   if (response.query.searchinfo.totalhits === 0) {
-     let ele = document.getElementById("summary");
-     ele.innerHTML = "Invalid movie, try a different one";
+    let ele1 = document.getElementById("movieintro");
+    ele1.innerHTML = "Invalid movie, try specifying the year and title, or try a different movie";
   }
 
   else {
@@ -90,10 +92,23 @@ try {
  const req = await fetch(url);
  const json = await req.json();
  text = json.parse.text["*"]
+ console.log(text);
+
  if(!text.includes("list of episodes")){
+
+
+  title = text.substring(text.search("font-size: 125%; font-style: italic;") + 38)
+  title = title.substring(0, title.search("</th>"));
+
+  poster = text.substring(text.search('src="//upload.wikimedia.org/')+7);
+  console.log(poster);
+  poster = poster.substring(0, poster.search('"'));
+  console.log(poster);
+
  text = text.substring(text.search("Edit section: Plot")+80)
  if(text.includes("Voice cast")){
   cast = text.substring(text.search("Voice cast"))
+  text = text.replaceAll("Voice cast", "Cast")
   }
   
  else if(text.includes("Edit section: Cast")){
@@ -133,10 +148,10 @@ try {
   }
   cast = cast.substring(x)  
 
- if(text.includes("Edit section: Cast")){     
+ if(text.includes("Edit section: Cast")){   
   text = text.substring(0,text.search("Edit section: Cast")-205) 
   text = text.substring(text.search(">")+5)     
-
+  console.log("hey" + text)  
   while(text.includes("File:")){
     text1 = text.substring(text.search("div class"))
     text1 = text1.substring(0, text1.search('\n'))
@@ -289,12 +304,16 @@ while(text.includes("&#91")){
 
   console.log(text)
 
- let ele = document.getElementById("summary");
- ele.innerHTML = text
+
+ let ele1 = document.getElementById("movieintro");
+ poster = "https://" + poster;
+ ele1.innerHTML = " <p class = 'intro' > " + name +"'s Movie </p>  <img id = poster src = " + poster  + " > </img>  <br> <br> <p class = 'intro' > Inspired by " + title + " </p> <br> " + text;
+
  }
  else{
-       let ele = document.getElementById("summary");
-       ele.innerHTML = "Invalid movie, try a different one"
+       let ele1 = document.getElementById("movieintro");
+       ele1.innerHTML = "Invalid movie, try specifying the year and title, or try a different movie";
+      
  }
 }else{
   let ele = document.getElementById("summary");

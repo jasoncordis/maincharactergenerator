@@ -7,32 +7,39 @@
     <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src = "wiki.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 
+<div id = full>
 <div class = home>
-<H1>
-    Main Character Generator
-   </H1>
-   
-    <body>
-    <div class = 'mainform'>
-    <form id='form' method = 'post'>
-           <p> Name: <input type='text' id = "user_name" required/></p>
+    <H1>
+        Main Character Generator
+    </H1>
+    
+        <body>
+        <div class = 'mainform'>
+            <form id='form' method = 'post'>
+                    <p> Name: <input type='text' id = "user_name" required/></p>
 
-<h4> <input type="radio" id="listmovie" name="listmovie" value="" checked > Pick a movie from the list: </h4> 
-           <div id = movielist>
-           
-           </div>
-           
-<h4> <input type="radio" id="entermovie" name="entermovie"> Or enter your own movie: </h4>
-           <div id = "searchmovie">
-           
-           </div>
-           <p><input id ="submit" type = "button" value='Enter'/></p>
-       </form>
-   </div>
+            <h4> <input type="radio" id="listmovie" name="listmovie" value="" checked > Pick a movie from the list: </h4> 
+                    <div id = movielist>
+                    
+                    </div>
+                    
+            <h4> <input type="radio" id="entermovie" name="entermovie"> Or enter your own movie: </h4>
+                    <div id = "searchmovie">
+                    
+                    </div>
+                    <p><input id ="submit" type = "button" value='Enter'/></p>
+            </form>
+    </div>
 </div> 
-   <div id="summary"></div>
+    <div id="movieintro"></div>
+    <div id="summary"></div>
+</div>
    </body>
 </html>
+
