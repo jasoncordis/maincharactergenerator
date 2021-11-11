@@ -6,6 +6,7 @@ window.onload=function(){
    }
    else if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) {
       document.getElementById("full").style.overflowY = "none";
+      document.getElementById("submitButton").innerHTML = "";
    }
 
   var ele = document.getElementById("searchmovie");
@@ -35,6 +36,40 @@ document.getElementById("entermovie").addEventListener("click", function(){
  ele1.innerHTML = "<p> Movie Name: <input type=\'text\' id = \"moviename\"/> Year: <input type=\'text\' id = \"year\"/> &nbsp; <br> (e.g. Movie Name: Forrest Gump, Year: 1994)   </p>"
  listmovie = 0;
 });
+
+document.getElementById('form').onsubmit = function(){
+  {
+    console.log(listmovie);
+    username = document.getElementById("user_name").value;
+    if(listmovie == 1){
+    var pick = document.getElementsByTagName('input');
+                        if(pick[2].checked)
+                        insertMainCharacter(41528, username)
+                        else if(pick[3].checked)
+                        insertMainCharacter(54166, username)
+                        else if(pick[4].checked)
+                        insertMainCharacter(930379, username)
+                        else if(pick[5].checked)
+                        insertMainCharacter(105872, username)
+                        else if(pick[6].checked)
+                        insertMainCharacter(1186616, username)
+                        else if(pick[7].checked)
+                        insertMainCharacter(561315, username)
+                        else if(pick[8].checked)
+                        insertMainCharacter(18717177, username)
+    }
+    else{
+     var ele2 = document.getElementById('moviename').value;
+     var ele3 = document.getElementById('year').value;
+     console.log(ele2);
+     ajax(ele2, ele3, username);
+    }											
+    
+    }
+
+  return false 
+}
+
 
 document.getElementById("submit").addEventListener("click", function(){
 username = document.getElementById("user_name").value;

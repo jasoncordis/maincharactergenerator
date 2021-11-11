@@ -21,7 +21,7 @@
     
         <body>
         <div class = 'mainform'>
-            <form id='form' method = 'post'>
+            <form id='form' method = 'post' onsubmit="return false" >
                     <p> Name: <input type='text' id = "user_name" required/></p>
 
             <h4> <input type="radio" id="listmovie" name="listmovie" value="" checked > Pick a movie from the list: </h4> 
@@ -33,7 +33,9 @@
                     <div id = "searchmovie">
                     
                     </div>
+                    <div id = "submitButton">
                     <p><input id ="submit" type = "button" value='Enter'/></p>
+                    </div>
             </form>
     </div>
 </div> 
