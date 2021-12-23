@@ -358,7 +358,7 @@ while(text.includes("&#91")){
         let ele = document.getElementById('mainform');
         if(document.getElementById("test")==null){
           var text1 = document.createElement("div")
-          text1.innerHTML = "Invalid movie, try a different one1111"
+          text1.innerHTML = "Invalid movie, try a different one"
           text1.id = "test"
           ele.append(text1)
         }
