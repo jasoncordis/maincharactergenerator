@@ -3,6 +3,7 @@ var mobile = 0;
 window.onload=function(){
   if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
     mobile = 1;
+    document.getElementById("inner").style.height = "55vh";
   }else{
     mobile = 0;
   }
@@ -346,9 +347,11 @@ while(text.includes("&#91")){
     text1.id = "test"
     ele.append(text1)
     if(mobile == 0){
-    let height = window.innerHeight * .8
-    document.getElementById("inner").style.height = height + "px";
+      let height = window.innerHeight * .8
+      document.getElementById("inner").style.height = height + "px";
     }
+    else
+      document.getElementById("inner").style.height = "55vh";
   }
   else {
     document.getElementById("test").innerHTML =  "<br></br><p class = 'intro' > " + name + "</p> <img id = poster src = " + poster  + " > </img> <p class = 'intro' > Inspired by " + title + " </p><br></br>" + '<div id = "summary-text">' + text + '</div>';
