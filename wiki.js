@@ -69,8 +69,15 @@ url: "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=" + f
 dataType: "jsonp",
 success: function(response) {
   if (response.query.searchinfo.totalhits === 0) {
-     let ele = document.getElementById("summary");
-     ele.innerHTML = "Invalid movie, try a different one";
+    let ele = document.getElementById('mainform');
+    if(document.getElementById("test")==null){
+      var text1 = document.createElement("div")
+      text1.innerHTML = "Invalid movie, try a different one";
+      text1.id = "test"
+      ele.append(text1)
+    }
+    else
+      document.getElementById('test').innerHTML = "Invalid movie, try a different one";
   }
 
   else {
@@ -106,6 +113,7 @@ try {
  console.log(poster);
  poster = "https://" + poster;
 
+ if(!text.includes('(film series) Wikipedia article.ogg') && !text.includes('Edit section: Standalone films')){
  if(!text.includes("list of episodes")){
 
   title = text.substring(text.search("font-size: 125%; font-style: italic;") + 38)
@@ -119,7 +127,6 @@ try {
  else if(text.includes("Edit section: Cast")){
   cast = text.substring(text.search("Edit section: Cast"))
   if(cast.includes('th scope="row"')){
-    console.log('fuck you')
     cast = cast.substring(cast.search('th scope="row">'+17))
     cast = cast.substring(0, cast.search('</th>'))
   }
@@ -177,7 +184,7 @@ try {
     console.log(text)
     
   while(text.includes("<")){
-    console.log('heyo')
+    //console.log('test')
     text1 = text.substring(text.search("<"), text.search(">")+1)
     text = text.replace(text1,'')
     if((text.length-text.search("<"))<50){
@@ -321,7 +328,6 @@ while(text.includes("&#91")){
   if(text.includes("Voice cast[edit]")){
     console.log(text.search("Voice cast"))
     text = text.substring(0, text.search("Voice cast"))
-    console.log("pussseyso")
     }
 
     console.log(text);
@@ -352,12 +358,12 @@ while(text.includes("&#91")){
         let ele = document.getElementById('mainform');
         if(document.getElementById("test")==null){
           var text1 = document.createElement("div")
-          text1.innerHTML = "Invalid movie, try a different one"
+          text1.innerHTML = "Invalid movie, try a different one1111"
           text1.id = "test"
           ele.append(text1)
         }
         else
-          document.getElementById('test').innerHTML = "Invalid movie, try a different one"
+          document.getElementById('test').innerHTML = "Invalid movie, try a different one111"
   }
   }else{
     let ele = document.getElementById('mainform');
@@ -370,6 +376,19 @@ while(text.includes("&#91")){
     else
       document.getElementById('test').innerHTML = "TV shows not supported, try entering a movie"
   }
+}
+else
+{
+  let ele = document.getElementById('mainform');
+  if(document.getElementById("test")==null){
+    var text1 = document.createElement("div")
+    text1.innerHTML = "Film series is not supported, enter a specific movie from the film series."
+    text1.id = "test"
+    ele.append(text1)
+  }
+  else
+    document.getElementById('test').innerHTML = "Film series is not supported, enter a specific movie from the film series."
+}
 } catch (e) {
  console.error(e);
 }
