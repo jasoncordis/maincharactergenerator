@@ -1,20 +1,16 @@
+var mobile = 0;
+
 window.onload=function(){
-
-   const ua = navigator.userAgent;
-   if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
-    document.getElementById("full").style.overflowY = "none";
-   }
-   else if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) {
-      document.getElementById("full").style.overflowY = "none";
-      document.getElementById("submitButton").innerHTML = "";
-      document.getElementById("poster").style.width = "50px";
-   }
-
+  if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+    mobile = 1;
+  }else{
+    mobile = 0;
+  }
   var ele = document.getElementById("searchmovie");
  ele.innerHTML = '<br>'
- 
+
  var ele1 = document.getElementById("movielist");
- ele1.innerHTML = "<input type=\"radio\" id=\"gump\" name=\"movie\"> <label for=\"gump\">Forrest Gump &nbsp; </label> <input type=\"radio\" id=\"raiders\" name=\"movie\"><label for=\"raiders\"> &nbsp;  Raiders of the Lost Ark &nbsp; </label><input type=\"radio\" id=\"casinoroyale\" name=\"movie\"><label for=\"casinoroyale\">&nbsp;Casino Royale &nbsp;  </label><input type=\"radio\" id=\"Clueless\" name=\"movie\"><label for=\"Clueless\">&nbsp;Clueless&nbsp;</label> </label><input type = \"radio\" id=\"The Shining\" name=\"movie\"><label for = \"The Shining\">&nbsp;The Shining&nbsp;</label> <input type = \"radio\" id = \"The Wizard of Oz\" name = \"movie\"><label for = \"The Wizard of Oz\"> &nbsp; The Wizard of Oz</label> &nbsp <input type = \"radio\" id = \"Shrek\" name = \"movie\"><label for = \"Shrek\"> &nbsp; Shrek</label>"	
+ ele1.innerHTML = "<label for=\"gump\"><input type=\"radio\" id=\"gump\" name=\"movie\"> Forrest Gump &nbsp; </label> <label for=\"raiders\"> <input type=\"radio\" id=\"raiders\" name=\"movie\">&nbsp;  Raiders of the Lost Ark &nbsp; </label> <label for=\"casinoroyale\"><input type=\"radio\" id=\"casinoroyale\" name=\"movie\">&nbsp;Casino Royale &nbsp;  </label> <label for=\"Clueless\"> <input type=\"radio\" id=\"Clueless\" name=\"movie\">&nbsp; Clueless &nbsp; </label><label for = \"The Shining\"><input type = \"radio\" id=\"The Shining\" name=\"movie\">&nbsp;The Shining&nbsp;</label> <label for = \"The Wizard of Oz\"> <input type = \"radio\" id = \"The Wizard of Oz\" name = \"movie\">&nbsp; The Wizard of Oz</label> &nbsp <label for = \"Shrek\"> <input type = \"radio\" id = \"Shrek\" name = \"movie\"> &nbsp; Shrek</label>"	
  
  var listmovie = 1;
  
@@ -22,7 +18,7 @@ document.getElementById("listmovie").addEventListener("click", function(){
   var radio = document.getElementById("entermovie");
  radio.checked = false;
   var ele1 = document.getElementById("movielist");
- ele1.innerHTML = "<input type=\"radio\" id=\"gump\" name=\"movie\"> <label for=\"gump\">Forrest Gump &nbsp; </label> <input type=\"radio\" id=\"raiders\" name=\"movie\"><label for=\"raiders\"> &nbsp;  Raiders of the Lost Ark &nbsp; </label><input type=\"radio\" id=\"casinoroyale\" name=\"movie\"><label for=\"casinoroyale\">&nbsp;Casino Royale &nbsp;  </label><input type=\"radio\" id=\"Clueless\" name=\"movie\"><label for=\"Clueless\">&nbsp;Clueless&nbsp;</label> </label><input type = \"radio\" id=\"The Shining\" name=\"movie\"><label for = \"The Shining\">&nbsp;The Shining&nbsp;</label> <input type = \"radio\" id = \"The Wizard of Oz\" name = \"movie\"><label for = \"The Wizard of Oz\"> &nbsp; The Wizard of Oz</label> &nbsp <input type = \"radio\" id = \"Shrek\" name = \"movie\"><label for = \"Shrek\"> &nbsp; Shrek</label>"		
+ ele1.innerHTML =  "<label for=\"gump\"><input type=\"radio\" id=\"gump\" name=\"movie\"> Forrest Gump &nbsp; </label> <label for=\"raiders\"> <input type=\"radio\" id=\"raiders\" name=\"movie\">&nbsp;  Raiders of the Lost Ark &nbsp; </label> <label for=\"casinoroyale\"><input type=\"radio\" id=\"casinoroyale\" name=\"movie\">&nbsp;Casino Royale &nbsp;  </label> <label for=\"Clueless\"> <input type=\"radio\" id=\"Clueless\" name=\"movie\">&nbsp; Clueless &nbsp; </label><label for = \"The Shining\"><input type = \"radio\" id=\"The Shining\" name=\"movie\">&nbsp;The Shining&nbsp;</label> <label for = \"The Wizard of Oz\"> <input type = \"radio\" id = \"The Wizard of Oz\" name = \"movie\">&nbsp; The Wizard of Oz</label> &nbsp <label for = \"Shrek\"> <input type = \"radio\" id = \"Shrek\" name = \"movie\"> &nbsp; Shrek</label>"	
  var ele2 = document.getElementById("searchmovie");
  ele2.innerHTML = "<br>";
  listmovie = 1;
@@ -38,58 +34,24 @@ document.getElementById("entermovie").addEventListener("click", function(){
  listmovie = 0;
 });
 
-document.getElementById('form').onsubmit = function(){
-  {
-    console.log(listmovie);
-    username = document.getElementById("user_name").value;
-    if(listmovie == 1){
-    var pick = document.getElementsByTagName('input');
-                        if(pick[2].checked)
-                        insertMainCharacter(41528, username)
-                        else if(pick[3].checked)
-                        insertMainCharacter(54166, username)
-                        else if(pick[4].checked)
-                        insertMainCharacter(930379, username)
-                        else if(pick[5].checked)
-                        insertMainCharacter(105872, username)
-                        else if(pick[6].checked)
-                        insertMainCharacter(1186616, username)
-                        else if(pick[7].checked)
-                        insertMainCharacter(561315, username)
-                        else if(pick[8].checked)
-                        insertMainCharacter(18717177, username)
-    }
-    else{
-     var ele2 = document.getElementById('moviename').value;
-     var ele3 = document.getElementById('year').value;
-     console.log(ele2);
-     ajax(ele2, ele3, username);
-    }											
-    
-    }
-
-  return false 
-}
-
-
 document.getElementById("submit").addEventListener("click", function(){
 username = document.getElementById("user_name").value;
 if(listmovie == 1){
 var pick = document.getElementsByTagName('input');
-                    if(pick[2].checked)
-                    insertMainCharacter(41528, username)
-                    else if(pick[3].checked)
-                    insertMainCharacter(54166, username)
-                    else if(pick[4].checked)
-                    insertMainCharacter(930379, username)
-                    else if(pick[5].checked)
-                    insertMainCharacter(105872, username)
-                    else if(pick[6].checked)
-                    insertMainCharacter(1186616, username)
-                    else if(pick[7].checked)
-                    insertMainCharacter(561315, username)
-                    else if(pick[8].checked)
-                    insertMainCharacter(18717177, username)
+    if(pick[2].checked)
+    insertMainCharacter(41528, username)
+    else if(pick[3].checked)
+    insertMainCharacter(54166, username)
+    else if(pick[4].checked)
+    insertMainCharacter(930379, username)
+    else if(pick[5].checked)
+    insertMainCharacter(105872, username)
+    else if(pick[6].checked)
+    insertMainCharacter(1186616, username)
+    else if(pick[7].checked)
+    insertMainCharacter(561315, username)
+    else if(pick[8].checked)
+    insertMainCharacter(18717177, username)
 }
 else{
  var ele2 = document.getElementById('moviename').value;
@@ -98,7 +60,6 @@ else{
 }											
 
 });
-
 }
 
 function ajax (keyword, year, name) { 
@@ -108,8 +69,8 @@ url: "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=" + f
 dataType: "jsonp",
 success: function(response) {
   if (response.query.searchinfo.totalhits === 0) {
-    let ele1 = document.getElementById("movieintro");
-    ele1.innerHTML = "Invalid movie, try specifying the year and title, or try a different movie";
+     let ele = document.getElementById("summary");
+     ele.innerHTML = "Invalid movie, try a different one";
   }
 
   else {
@@ -123,9 +84,6 @@ error: function () {
 }
 });
 }
-
-var hasChildDiv = 0;
-var hasError = 0;
 
 const insertMainCharacter = async function(item, name) {
 const url = "https://en.wikipedia.org/w/api.php?" +
@@ -141,27 +99,31 @@ try {
  const req = await fetch(url);
  const json = await req.json();
  text = json.parse.text["*"]
- console.log(text);
+
+ poster = text.substring(text.search('src="//upload.wikimedia.org/')+7);
+ console.log(poster);
+ poster = poster.substring(0, poster.search('"'));
+ console.log(poster);
+ poster = "https://" + poster;
 
  if(!text.includes("list of episodes")){
-
 
   title = text.substring(text.search("font-size: 125%; font-style: italic;") + 38)
   title = title.substring(0, title.search("</th>"));
 
-  poster = text.substring(text.search('src="//upload.wikimedia.org/')+7);
-  console.log(poster);
-  poster = poster.substring(0, poster.search('"'));
-  console.log(poster);
-
  text = text.substring(text.search("Edit section: Plot")+80)
  if(text.includes("Voice cast")){
   cast = text.substring(text.search("Voice cast"))
-  text = text.replaceAll("Voice cast", "Cast")
   }
   
  else if(text.includes("Edit section: Cast")){
   cast = text.substring(text.search("Edit section: Cast"))
+  if(cast.includes('th scope="row"')){
+    console.log('fuck you')
+    cast = cast.substring(cast.search('th scope="row">'+17))
+    cast = cast.substring(0, cast.search('</th>'))
+  }
+  console.log(cast)
 }
 
  cast = cast.substring(cast.search("<li>"))
@@ -173,8 +135,6 @@ try {
       cast = cast.substring(cast.search('<li>')+4)
  }
 
- console.log(cast);
-
  if(cast.includes("/wiki/"))
      cast = cast.substring(cast.search('>')+1)              
  
@@ -185,21 +145,10 @@ try {
  if(cast.includes(','))
       cast = cast.substring(0, cast.search(','))
 
-  var whileError = 0;
-
-  while(cast.slice(-1)== ' '){
+  while(cast.slice(-1)== ' ')
       cast = cast.substring(0, cast.length-1);
-      if(whileError > 500){
-      console.log("cast.slice(-1) = ' '")
-      break;
-    }
-  }
-
-  whileError = 0;
 
   var x = 0
-
-  console.log(cast);
 
   for(let i = 0; i < cast.length; i++){
     if(cast[i] == ' ')
@@ -209,44 +158,33 @@ try {
   }
   cast = cast.substring(x)  
 
-  console.log(cast);
-
- if(text.includes("Edit section: Cast")){   
+  console.log(text)
+ if(text.includes("Edit section: Cast")){     
+  text = text.substring(text.search('<p>'))
   text = text.substring(0,text.search("Edit section: Cast")-205) 
-  text = text.substring(text.search(">")+5)     
-  console.log("hey" + text)  
+
   while(text.includes("File:")){
     text1 = text.substring(text.search("div class"))
     text1 = text1.substring(0, text1.search('\n'))
     text = text.replace(text1, '')
-    if(whileError > 500){
-      console.log('text.includes("File:")')
-      break;
-    }
   }
-  whileError = 0;
   
   if(text.indexOf('<')>text.indexOf('>')){
     text1= text.substring(0, text.search('<')+1)
     text=text.replace(text1,'')
     }
     
-
+    console.log(text)
+    
   while(text.includes("<")){
+    console.log('heyo')
     text1 = text.substring(text.search("<"), text.search(">")+1)
     text = text.replace(text1,'')
     if((text.length-text.search("<"))<50){
       break
       }
-
-      if(whileError > 500){
-        console.log('text.includes("<")')
-        break;
-      }
-
   }
 
-  whileError = 0;
 
 while(text.includes("&#91")){
   text1 = text.substring(text.search("&#91;"), text.search("&#93;")+5)
@@ -254,24 +192,14 @@ while(text.includes("&#91")){
   if((text.length-text.search("&#91;"))<20){
     break
     }
-
-    if(whileError > 500){
-      console.log('text.includes("&#91")')
-      break;
-    }
  
 }
 
-whileError = 0;
-
  text = text.replaceAll('\n', '<br><br>')
-
- console.log(cast)
-
 
  if(name != ""){
  if(cast.includes(" ")){
-      console.log(cast)
+   
       firstname = cast.substring(0, cast.search(" "))
       
       if(cast.includes('"')){
@@ -319,6 +247,7 @@ whileError = 0;
       }
 
       if(text.includes(name + ' "' + name + '"')){
+        console.log("slknegsenlkg")
         text1 = name + ' "' + name + '"'
         text = text.replaceAll(text1, name)
       }
@@ -379,68 +308,68 @@ whileError = 0;
     }
 
   }
-  
   text = text.replaceAll("<br><br><br><br>", "<br><br>")
   text = text.substring(0, text.lastIndexOf('.')+1)
-
   while(text.search("<br>")==0){
     text = text.substring(4);
-    whileError++;
-
-    if(whileError > 500){
-      console.log('text.search("<br>"==0 error')
-      break;
-    }
   }
-  whileError = 0;
 
   text = text += "<br><br><br><br>"
 
   console.log(text)
 
+  if(text.includes("Voice cast[edit]")){
+    console.log(text.search("Voice cast"))
+    text = text.substring(0, text.search("Voice cast"))
+    console.log("pussseyso")
+    }
 
- poster = "https://" + poster;
+    console.log(text);
 
- if(hasError == 1){
-    document.getElementById("childDiv").innerHTML = "";
- }
+
+ let ele = document.getElementById('mainform');
 
  if(name.slice(-1)!='s')
     name = name + "'s Movie"
   else
     name = name + "' Movie"
-  
 
- if(hasChildDiv == 0){
- var newChild = document.createElement("div");
- newChild.innerHTML = "<br> <div id = 'childDiv'> <p class = 'intro' > " + name + "</p>  <img id = poster src = " + poster  + " > </img>  <br> <br> <p class = 'intro' > Inspired by " + title + " </p> <br> <p id = summary-text> "+ text + "</p></div>"; 
- document.getElementById("home").appendChild(newChild);  
- }
- else
- {
-   document.getElementById("childDiv").innerHTML =  "<br> <div id = 'childDiv'> <p class = 'intro' > " + name + "</p>  <img id = poster src = " + poster  + " > </img>  <br> <br> <p class = 'intro' > Inspired by " + title + " </p> <br> <p id = summary-text> "+ text + "</p></div>"; 
- }
- hasChildDiv = 1;
-
- }
- else{
-       let ele1 = document.getElementById("childDiv");
-       ele1.innerHTML = "Invalid movie, try specifying the year and title, or try a different movie";
-      
- }
-}else{
-  if(hasChildDiv == 0){
-    var newChild = document.createElement("div");
-    newChild.innerHTML = "<br> <div id = 'childDiv'> TV shows not supported, try entering a movie </div>"; 
-    document.getElementById("home").appendChild(newChild);  
-    hasError = 1;
+ if(document.getElementById("test")==null){
+    var text1 = document.createElement("div")
+    text1.innerHTML =  "<br></br><p class = 'intro' > " + name + "</p>  <img id = poster src = " + poster  + " > </img> </p> <p class = 'intro' > Inspired by " + title + " </p><br></br>" + '<div id = "summary-text">' + text + '</div>';
+    text1.id = "test"
+    ele.append(text1)
+    if(mobile == 0){
+    let height = window.innerHeight * .8
+    document.getElementById("inner").style.height = height + "px";
+    }
   }
-  else{
-  let ele = document.getElementById("childDiv");
-  ele.innerHTML = "TV shows not supported, try entering a movie"
-    hasError = 1;
+  else {
+    document.getElementById("test").innerHTML =  "<br></br><p class = 'intro' > " + name + "</p> <img id = poster src = " + poster  + " > </img> </p><br></br>" + '<div id = "summary-text">' + text + '</div>';
   }
 }
+  else{
+        let ele = document.getElementById('mainform');
+        if(document.getElementById("test")==null){
+          var text1 = document.createElement("div")
+          text1.innerHTML = "Invalid movie, try a different one"
+          text1.id = "test"
+          ele.append(text1)
+        }
+        else
+          document.getElementById('test').innerHTML = "Invalid movie, try a different one"
+  }
+  }else{
+    let ele = document.getElementById('mainform');
+    if(document.getElementById("test")==null){
+      var text1 = document.createElement("div")
+      text1.innerHTML = "TV shows not supported, try entering a movie"
+      text1.id = "test"
+      ele.append(text1)
+    }
+    else
+      document.getElementById('test').innerHTML = "TV shows not supported, try entering a movie"
+  }
 } catch (e) {
  console.error(e);
 }
